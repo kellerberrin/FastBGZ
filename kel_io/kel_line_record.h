@@ -59,7 +59,7 @@ public:
   [[nodiscard]] std::pair<size_t, std::string> getLineData();
   [[nodiscard]] size_t lineCount() const { return line_count_; }
   [[nodiscard]] const std::string_view getView() const { return {line_data_}; }
-   [[nodiscard]] bool EOFRecord() const { return EOF_; }
+  [[nodiscard]] bool EOFRecord() const { return EOF_; }
   [[nodiscard]] bool empty() const { return empty_; }
 
 
