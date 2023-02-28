@@ -1,6 +1,6 @@
 FastBGZ
 ========
-A Fast BGZ (Block gzipped) Decompression Utility.
+A Fast BGZ (block gzipped) Decompression Utility.
 -------------------------------------------------
 
 
@@ -27,7 +27,7 @@ files to stdout (all app logging is to stderr) and verifies that files are in va
 In addition, there are some (5) application infrastructure files in directory kel_app that are not relevant to
 the decompression logic.
 
-THe software is written in C++20 (g++12.1) on linux kernel 5.15. It has not been tested on other platforms but 
+The software is written in C++20 (g++12.1) on linux kernel 5.15. It has not been tested on other platforms but 
 there is no OS specific code (except possibly zlib). 
 A cmake file is provided for easy compilation and you must have the popular spdlog C++ logging utility installed.
 
