@@ -114,6 +114,13 @@ public:
 
   }
 
+  void clear() {
+
+    joinThreads();
+    input_queue_.clear();
+    output_queue_.clear();
+
+  }
   // Access queue stats.
   [[nodiscard]] const QueueTidal<std::future<OutputObject>>& outputQueue() const { return output_queue_; }
   [[nodiscard]] const QueueTidal<std::unique_ptr<QueuedFunctor>>& inputQueue() const { return input_queue_; }

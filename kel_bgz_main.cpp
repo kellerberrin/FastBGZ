@@ -87,7 +87,7 @@ bool ExecEnvBGZ::parseCommandLine() {
       }
       if (not kel::Utility::fileExists(*cmd_iterator)) {
 
-        std::cerr << "Specified .bgz file: " << *cmd_iterator << "not found\n";
+        std::cerr << "Specified .bgz file: " << *cmd_iterator << " not found\n";
         return false;
 
       }

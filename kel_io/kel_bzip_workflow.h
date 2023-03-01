@@ -116,7 +116,7 @@ class BGZStreamIO  {
   // Convenience typedefs.
   using CompressedType = std::unique_ptr<CompressedBlock>;
   using DecompressedType = std::unique_ptr<DecompressedBlock>;
-  using DecompressionWorkFlow = WorkflowPipeline<CompressedType, DecompressedType>;
+  using DecompressionPipeline = WorkflowPipeline<CompressedType, DecompressedType>;
 
 public:
 
@@ -142,7 +142,7 @@ public:
   [[nodiscard]] BGZStreamState streamState() const { return stream_state_; }
 
   // Access the underlying queues for diagnostics.
-  [[nodiscard]] const DecompressionWorkFlow& workFlow() const { return decompression_workflow_; }
+  [[nodiscard]] const DecompressionPipeline& workFlow() const { return decompression_pipeline_; }
   [[nodiscard]] const QueueTidal<IOLineRecord>& lineQueue() const { return line_queue_; }
 
 private:
@@ -150,11 +150,11 @@ private:
   std::string file_name_;
   std::ifstream bgz_file_;
   size_t record_counter_{0};
-  WorkflowThreads reader_thread_{1};
+  WorkflowThreads reader_thread_;
   std::future<bool> reader_return_;
-  WorkflowThreads assemble_records_thread_{1};
+  WorkflowThreads assemble_records_thread_;
   // The synchronous decompression pipeline.
-  DecompressionWorkFlow decompression_workflow_;
+  DecompressionPipeline decompression_pipeline_;
   // Queue of parsed line records.
   QueueTidal<IOLineRecord> line_queue_{LINE_HIGH_TIDE_, LINE_LOW_TIDE_, LINE_QUEUE_NAME_, LINE_SAMPLE_FREQ_};
 
@@ -206,7 +206,7 @@ private:
   constexpr static const char EOL_MARKER_ = '\n';
 
   // Read and decompress the entire bgz file.
-  [[nodiscard]] bool readDecompressFile();
+  void readDecompressFile();
   // Read a bgz block.
   [[nodiscard]] CompressedType readCompressedBlock(size_t block_count);
   // Decompress a bgz block.
